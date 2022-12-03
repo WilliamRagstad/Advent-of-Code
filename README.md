@@ -1,4 +1,5 @@
 <div align=center>
+    <img src="christmas_ferris.png" width="140px"/>
     <h1>🎄 Advent of Code 🎅</h1>
 </div>
 
