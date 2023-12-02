@@ -12,7 +12,7 @@ For this year, I decided start trying to learn Haskell for once. Allowing me a s
 You can find all tasks on [AoC 2015](https://adventofcode.com/2015).
 
 ## Run tasks
-> All the commands below are assuming that you are located in the `/Haskell/<day>` directory containing each subtask `<part>` of that day.
+> All the commands below are assuming that you are located in the `/<day>` directory containing each subtask `<part>` of that day.
 
 Usually, we want quick results as our task implementations won't need to be compiled, just evaluated.
 Therefore you can quickly *interpret* each task using `runhaskell <part>`.

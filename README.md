@@ -22,8 +22,8 @@ Every year I try to learn a new language as fast as possible through solving pro
 Below is a list of the years I have participated in:
 | Year | Language | Stars | Leaderboard | Solutions |
 |:----:|:--------:|:-----:|:-----------:|:---------:|
-| [2015](https://adventofcode.com/2015) | [Haskell](https://www.haskell.org/) | 3 | [- 🏆](https://adventofcode.com/2015/leaderboard) | [📁/](https://github.com/WilliamRagstad/Advent-of-Code/tree/main/2015/Haskell) |
-| [2022](https://adventofcode.com/2022) | [Rust](https://www.rust-lang.org/) | 8 | [- 🏆](https://adventofcode.com/2022/leaderboard) | [📁/](https://github.com/WilliamRagstad/Advent-of-Code/tree/main/2022/Rust) |
+| [2015](https://adventofcode.com/2015) | [Haskell](https://www.haskell.org/) | 3 | [- 🏆](https://adventofcode.com/2015/leaderboard) | [📁/](https://github.com/WilliamRagstad/Advent-of-Code/tree/main/2015) |
+| [2022](https://adventofcode.com/2022) | [Rust](https://www.rust-lang.org/) | 8 | [- 🏆](https://adventofcode.com/2022/leaderboard) | [📁/](https://github.com/WilliamRagstad/Advent-of-Code/tree/main/2022) |
 | [2023](https://adventofcode.com/2023) | [F#](https://fsharp.org/) | 4 | [- 🏆](https://adventofcode.com/2023/leaderboard) | [📁/](https://github.com/WilliamRagstad/Advent-of-Code/tree/main/2023/) |
 
 ## Notice
