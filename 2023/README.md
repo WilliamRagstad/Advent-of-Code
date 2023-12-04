@@ -32,7 +32,7 @@ Today I learned about:
 - A `list` is a linked list, and an `array` is a contiguous block of memory in F#.
 - Tuple types are defined with `let tuple: (int * int) = (1, 2)`
 - Lists can be defined with `"A" :: "B" :: "C" :: []`
-- Match statements look like this:
+- Pattern matching statements look like this:
 ```fsharp
 match list with
 | [] -> ...
@@ -60,3 +60,36 @@ Today I learned about:
 - Mutability
     - `let mutable x = 1`
     - `x <- 2`
+
+# Day 3
+Today I learned about:
+- Records
+    - Records are defined with `type Round = { red: int; green: int; blue: int }`
+    - Records can be destructured with `let { red; green; blue } = round`
+    - Records can be updated with `let newRound = { round with red = 1 }`
+- A deeper dive into advanced parsing (2D input)
+    - Directional scanning withing a bounded window
+    - Hamming distances (Levenshtein distance, Manhattan distance, taxicab geometry)
+- Composition of functions
+    - Functions can be composed with `>>` and `<<`
+    - Types can be composed with `*` (e.g. `(int * int) list`) and `->` (e.g. `int -> int -> int`)
+- Arbitrary assignment to two variables depending on a condition
+```fsharp
+let mutable first = None
+let mutable second = None
+while condition do
+    match test with
+    | expr ->
+        match first with
+        | None -> first <- Some(expr)
+        | Some(_) ->
+            match second with
+            | None -> second <- Some(expr)
+            | Some(_) ->
+                failwith "Expected only two matches"
+```
+- `List.choose` can be used to filter out `None` values from a list of `Option` types
+```fsharp
+let potential_gears: Symbol list = symbols |> List.filter potential_gear
+let gears: Gear list = potential_gears |> List.choose (is_gear parts)
+```
