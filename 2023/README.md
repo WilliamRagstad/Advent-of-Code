@@ -61,7 +61,7 @@ Today I learned about:
     - `let mutable x = 1`
     - `x <- 2`
 
-# Day 3
+## Day 3
 Today I learned about:
 - Records
     - Records are defined with `type Round = { red: int; green: int; blue: int }`
@@ -93,3 +93,25 @@ while condition do
 let potential_gears: Symbol list = symbols |> List.filter potential_gear
 let gears: Gear list = potential_gears |> List.choose (is_gear parts)
 ```
+
+## Day 4
+Today I learned about:
+- `(debug >> int)` can be used to debug a value and convert it to an int in one go
+- There is discussions about making the `fun` keyword optional in F# (see [1](https://stackoverflow.com/questions/70388340/do-fun-lambda-expressions-have-shorthand-syntax), [2](https://github.com/fsharp/fslang-suggestions/issues/634), [3](https://github.com/fsharp/fslang-suggestions/issues/168), and [4](https://github.com/fsharp/fslang-suggestions/issues/506))
+- Worked with a mutable `Dictionary` from the .NET BCL (Base Class Library) in F#. It's a bit verbose, but it works.
+```fsharp
+let dict = Dictionary<string, int>() // Does not require `mutable` keyword
+dict.Add("key", 1)
+dict.["key"] <- 2
+```
+- Read up on the difference between `Dictionary`, `Hashtable` and `Map` in F#. [1](https://stackoverflow.com/questions/29077352/f-difference-between-dictionary-hashtable-and-map) and [2](https://learn.microsoft.com/en-us/dotnet/fsharp/language-reference/fsharp-collection-types).
+    - `Dictionary` this is a generic mutable collection implementation of the hashtable from .NET BCL.
+    - `Hashtable` represents a collection of key/value pairs that are organized based on the hash code of the key. This is a mutable collection from .NET BCL.
+    - `Map` is immutable and from the F# Core library. It is implemented based on AVL trees which is an entirely different data structure with different performance characteristics and use cases. [1](https://fsharp.github.io/fsharp-core-docs/reference/fsharp-collections-fsharpmap-2.html) and [2](https://www.tutorialspoint.com/fsharp/fsharp_maps.htm).
+    - `HashMap` is a mutable collection in the [`FSharp.Data.Adaptive`](https://fsprojects.github.io/FSharp.Data.Adaptive/) library. [1](https://fsprojects.github.io/FSharp.Data.Adaptive/reference/fsharp-data-adaptive-hashmapmodule.html).
+- Create a sequence of numbers with `seq { 1 .. 10 }` (inclusive). [1](https://learn.microsoft.com/en-us/dotnet/fsharp/language-reference/sequences) and [2](https://stackoverflow.com/questions/36780574/f-equivalent-of-python-range).
+```fsharp
+let sequence = seq { 1 .. 10 }
+```
+- Create a sequence of numbers with `seq { 1 .. 2 .. 10 }` (inclusive, step size)
+- The `seq` keyword is **not required**, using only `{ 1..10 }` works just fine!
