@@ -24,7 +24,7 @@ Below is a list of the years I have participated in:
 |:----:|:--------:|:-----:|:-----------:|:---------:|
 | [2015](https://adventofcode.com/2015) | [Haskell](https://www.haskell.org/) | 3 | [- 🏆](https://adventofcode.com/2015/leaderboard) | [📁/](https://github.com/WilliamRagstad/Advent-of-Code/tree/main/2015) |
 | [2022](https://adventofcode.com/2022) | [Rust](https://www.rust-lang.org/) | 8 | [- 🏆](https://adventofcode.com/2022/leaderboard) | [📁/](https://github.com/WilliamRagstad/Advent-of-Code/tree/main/2022) |
-| [2023](https://adventofcode.com/2023) | [F#](https://fsharp.org/) | 6 | [- 🏆](https://adventofcode.com/2023/leaderboard) | [📁/](https://github.com/WilliamRagstad/Advent-of-Code/tree/main/2023/) |
+| [2023](https://adventofcode.com/2023) | [F#](https://fsharp.org/) | 10 | [- 🏆](https://adventofcode.com/2023/leaderboard) | [📁/](https://github.com/WilliamRagstad/Advent-of-Code/tree/main/2023/) |
 
 ## Notice
 My solutions aren't always the most efficient, idiomatic or readable as I try to solve the problems as quickly as possible.
