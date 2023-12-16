@@ -145,3 +145,10 @@ type Number = UInt64
 ```
 - The `UInt64` type is an unsigned 64-bit integer
 
+## Day 6
+Today I learned about:
+- You can pass operators as functions, e.g. `let add = (+)`, `Array.fold (*) 1 arr`, etc.
+- Regexes replace can be used to replace all occurrences of a pattern with a string, e.g. `Regex.Replace(str, @"\s+", " "))`
+- `uint64` must be parsed with `UInt64.Parse` or `UInt64.TryParse` or simply `uint64`
+- Arrays are created with `[| 1; 2; 3 |]`
+- `List.item` and `Array.item` can be used to get an item at a specific index
