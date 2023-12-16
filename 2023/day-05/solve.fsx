@@ -1,15 +1,15 @@
 open System
 
-let format (s: string) =
-    s.Trim().Replace("\r", "")
+let format (s: string) = s.Trim().Replace("\r", "")
 let input = System.IO.File.ReadAllText("input.txt") |> format
 
 let debug value =
     printfn "%A" value
     value
 
-let example_assert (part: int) (example: int) (expected: uint64) (value: uint64) =
-    if value = expected then printfn "P%d example %d: %A (correct)" part example value
+let example_assert (part: int) (example: int) (expected: 'a) (value: 'a) =
+    if value = expected then
+        printfn "P%d example %d: %A (correct)" part example value
     else
         printfn "P%d example %d: Expected %A, got %A" part example expected value
         Environment.Exit(1)
@@ -183,13 +183,23 @@ temperature-to-humidity map:
 humidity-to-location map:
 60 56 37
 56 93 4
-" |> format
+"
+    |> format
+
 let example_2 = @"" |> format
 let example_3 = @"" |> format
 
 type Number = uint64 // unsigned 64-bit integer
-type MappingRange = { source: Number; destination: Number; length: Number }
-type Mapping = { name: string; ranges: MappingRange array }
+
+type MappingRange =
+    { source: Number
+      destination: Number
+      length: Number }
+
+type Mapping =
+    { name: string
+      ranges: MappingRange array }
+
 type Seed = Number
 
 let parse (parse_initial_line) (input: string) =
@@ -197,37 +207,46 @@ let parse (parse_initial_line) (input: string) =
     // Remaining lines are lists of mappings from top down
     let segments = input.Split("\n\n")
     let initial_state = parse_initial_line segments.[0]
+
     let mappings =
         segments.[1..]
         |> Array.map (fun s ->
             let lines = s.Split("\n")
             let name = lines.[0].Split(" ").[0]
+
             let parse_range (s: string) : MappingRange =
                 let parts = s.Split(" ")
-                { source = Number.Parse parts.[1]; destination = Number.Parse parts.[0]; length = Number.Parse parts.[2] }
+
+                { source = Number.Parse parts.[1]
+                  destination = Number.Parse parts.[0]
+                  length = Number.Parse parts.[2] }
+
             let ranges = lines.[1..] |> Array.map parse_range
-            { name = name; ranges = ranges }
-        )
+            { name = name; ranges = ranges })
     // seeds, mappings
     initial_state, mappings
 
-let apply_mapping (mapping: Mapping) (value: Number) : Number =
-    match mapping.ranges |> Array.tryFind (fun r -> r.source <= value && value < r.source + r.length) with
+let apply_mapping_num (mapping: Mapping) (value: Number) : Number =
+    match
+        mapping.ranges
+        |> Array.tryFind (fun r -> r.source <= value && value < r.source + r.length)
+    with
     | Some range -> value - range.source + range.destination
     | None -> value // No mapping found, return the same value
 
-let solve_p1 ((seeds: Number array), (mappings: Mapping array)): Number =
+let solve_p1 ((seeds: Number array), (mappings: Mapping array)) : Number =
     // Mutate the seeds array in place to get the final location
     let mutable values = seeds
-    for mapping in mappings do values <- values |> Array.map (apply_mapping mapping)
+
+    for mapping in mappings do
+        values <- values |> Array.map (apply_mapping_num mapping)
     // Extract the lowest location number
     values |> Array.min
 
 let parse_seeds (input: string) : Seed array =
-    input.Split(" ") |> Array.skip(1) |> Array.map Seed.Parse
+    input.Split(" ") |> Array.skip (1) |> Array.map Seed.Parse
 
-example_assert 1 1 35UL
-    (example_1 |> parse parse_seeds |> solve_p1)
+example_assert 1 1 35UL (example_1 |> parse parse_seeds |> solve_p1)
 let p1 = input |> parse parse_seeds |> solve_p1
 printfn "P1: %A" p1
 // Tries:
@@ -267,49 +286,67 @@ Conclusion:
 type Range = { start: Number; length: Number }
 
 let parse_seed_ranges (input: string) : Range array =
-    input.Split(" ") |> Array.skip(1) |> Array.chunkBySize 2 |> Array.map (fun parts ->
-        { start = Number.Parse parts.[0]; length = Number.Parse parts.[1] }
-    )
+    input.Split(" ")
+    |> Array.skip (1)
+    |> Array.chunkBySize 2
+    |> Array.map (fun parts ->
+        { start = Number.Parse parts.[0]
+          length = Number.Parse parts.[1] })
 
-let solve_p2 ((seed_ranges: Range array), (mappings: Mapping array)): Number =
+/// Split up the range into sub-ranges that are covered by the mapping
+let subranges (ranges: Range array) (mapping: Mapping) : Range array =
+    let mutable new_ranges: Range list = []
+    let mapping_ranges = mapping.ranges |> Array.sortBy (fun r -> r.source)
+
+    for range in ranges do
+        let mutable start = range.start
+        let mutable length = range.length
+
+        for mapping_range in mapping_ranges do
+            // Check if the mapping range start is within the current range
+            if start < mapping_range.source && mapping_range.source < start + length then
+                // Add the sub-range before the mapping range
+                let new_range =
+                    { start = start
+                      length = mapping_range.source - start }
+                // Add the new range
+                new_ranges <- new_range :: new_ranges
+                // Update the current range
+                start <- mapping_range.source
+                length <- length - new_range.length
+        // Add the last sub-range
+        let new_range = { start = start; length = length }
+        new_ranges <- new_range :: new_ranges
+    // Return the new ranges
+    new_ranges |> List.toArray
+
+let apply_mapping_range (mapping: Mapping) (range: Range) : Range =
+    { start = range.start |> apply_mapping_num mapping
+      length = range.length }
+
+let solve_p2 ((seed_ranges: Range array), (mappings: Mapping array)) : Number =
     // Approach:
     // Split up the seed ranges into sub-ranges that are covered by the mappings
     // Then, for each sub-range, split and apply the mappings to get (more) new sub-ranges
     // Notice:
     //      1. Never expand the ranges, only split them up into smaller ranges
     // Lastly, extract the lowest location number from the lowest sub-range
-    let location_ranges = Array.fold (fun (ranges: Range array) (mapping: Mapping) ->
-        // Split up the seed range into sub-ranges that are covered by the mappings
-        let mutable new_ranges: Range list = []
-        for mapping_range in mapping.ranges do
-            for range in ranges do
-                // 1. If a mapping range has a starting index inside of a range, add a new range to the list
-                if range.start <= mapping_range.source && mapping_range.source < range.start + range.length then
-                    new_ranges <- { start = range.start; length = mapping_range.source - range.start } :: new_ranges
-                // 2. If a mapping range has an ending index inside of a range, add a new range to the list
-                if range.start <= mapping_range.source + mapping_range.length && mapping_range.source + mapping_range.length < range.start + range.length then
-                    new_ranges <- { start = mapping_range.source + mapping_range.length; length = range.start + range.length - mapping_range.source - mapping_range.length } :: new_ranges
-                // 3. If a mapping range is a subset of a range, add a new range to the list
-                if mapping_range.source <= range.start && range.start + range.length <= mapping_range.source + mapping_range.length then
-                    new_ranges <- { start = range.start; length = mapping_range.source - range.start } :: new_ranges
-                    new_ranges <- { start = mapping_range.source + mapping_range.length; length = range.start + range.length - mapping_range.source - mapping_range.length } :: new_ranges
-                // 4. If a mapping range is a superset of a range, add a new range to the list
-                if range.start <= mapping_range.source && mapping_range.source + mapping_range.length <= range.start + range.length then
-                    // Do nothing
-                    ()
-                // 5. If a mapping range is disjoint from a range, add the range to the list
-                if mapping_range.source + mapping_range.length <= range.start || range.start + range.length <= mapping_range.source then
-                    new_ranges <- range :: new_ranges
-            
-        new_ranges |> Array.ofList) seed_ranges mappings
+    let location_ranges =
+        Array.fold
+            (fun (ranges: Range array) (mapping: Mapping) ->
+                // Split up the seed range into sub-ranges that are covered by the mappings
+                let ranges = subranges ranges mapping
+                // Perform the mapping on each sub-range (either the same or moved)
+                ranges |> Array.map (apply_mapping_range mapping))
+            seed_ranges
+            mappings
     // Extract the lowest location number
     location_ranges |> Array.map (fun r -> r.start) |> Array.min
-    // 42UL
+// 42UL
 
-example_assert 2 1 46UL
-    (example_1 |> parse parse_seed_ranges |> solve_p2)
+example_assert 2 1 46UL (example_1 |> parse parse_seed_ranges |> solve_p2)
 
 let p2 = input |> parse parse_seed_ranges |> solve_p2
 printfn "P2: %A" p2
 // Tries:
-// 
+// 52510809 - correct

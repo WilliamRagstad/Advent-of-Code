@@ -115,3 +115,33 @@ let sequence = seq { 1 .. 10 }
 ```
 - Create a sequence of numbers with `seq { 1 .. 2 .. 10 }` (inclusive, step size)
 - The `seq` keyword is **not required**, using only `{ 1..10 }` works just fine!
+
+## Day 5
+Today I learned about:
+- One can write generic asserting test cases for the example inputs:
+```fsharp
+let example_assert (part: int) (example: int) (expected: 'a) (value: 'a) =
+    if value = expected then
+        printfn "P%d example %d: %A (correct)" part example value
+    else
+        printfn "P%d example %d: Expected %A, got %A" part example expected value
+        Environment.Exit(1)
+
+
+example_assert 1 1 35UL (example_1 |> parse parse_seeds |> solve_p1)
+let p1 = input |> parse parse_seeds |> solve_p1
+printfn "P1: %A" p1
+
+example_assert 2 1 46UL (example_1 |> parse parse_seed_ranges |> solve_p2)
+let p2 = input |> parse parse_seed_ranges |> solve_p2
+printfn "P2: %A" p2
+```
+- The `|>` operator can be used to pipe the result of one function into another, e.g. `input |> parse parse_seeds |> solve_p1`
+- Type aliases can be defined with `type`:
+```fsharp
+type Seed = int
+type SeedRange = Seed * Seed
+type Number = UInt64
+```
+- The `UInt64` type is an unsigned 64-bit integer
+
