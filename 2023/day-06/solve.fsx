@@ -75,7 +75,7 @@ Conclusion:
 **)
 
 let parse_race (line: string) : uint64 array =
-    [| Regex.Replace(line.Split(':').[1], @"\s+", "") |> UInt64.Parse |]
+    [| Regex.Replace(line.Split(':').[1], @"\s+", "") |> uint64 |]
 
 let solve_p2 (race: Race) = waysToWin race
 example_assert 2 1 71503 (example_1 |> lines |> parse_input parse_race |> List.item 0 |> solve_p2)
