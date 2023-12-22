@@ -19,16 +19,11 @@ let example_assert (part: int) (example: int) (expected: 'a) (value: 'a) =
         Environment.Exit(1)
 
 // --- Part One ---
-(**
-
----
-Conclusion:
+(** Conclusion:
 - 
 **)
 
 let example_1 = @"" |> lines
-let example_2 = @"" |> lines
-let example_3 = @"" |> lines
 
 let solve_p1 a = ()
 example_assert 1 1 () (example_1 |> solve_p1)
@@ -38,10 +33,7 @@ printfn "P1: %A" p1
 
 
 // --- Part Two ---
-(**
-
----
-Conclusion:
+(** Conclusion:
 - 
 **)
 
