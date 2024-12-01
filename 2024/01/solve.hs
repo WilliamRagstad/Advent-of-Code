@@ -1,13 +1,19 @@
 import Data.Bifunctor (bimap)
 import Data.List
 
-main = interact $ show . (\input -> (solve1 input, solve2 input)) . transformLists . parseInput
+main = interact $ show . (\input -> (solve1 input, solve2 input)) . parseInput
 
-parseInput :: String -> [[Int]]
-parseInput = map (map read . words) . lines
-
-transformLists :: [[Int]] -> ([Int], [Int])
-transformLists = foldr (\[x, y] (xs, ys) -> (x : xs, y : ys)) ([], [])
+parseInput :: String -> ([Int], [Int])
+parseInput =
+  foldr
+    ( accumulate
+        . map read
+        . words
+    )
+    ([], [])
+    . lines
+  where
+    accumulate [x, y] (xs, ys) = (x : xs, y : ys)
 
 ---------------- SOLUTION 1 ----------------
 -- Sort two lists and taking the absolute difference
