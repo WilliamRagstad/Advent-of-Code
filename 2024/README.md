@@ -35,4 +35,11 @@ Today I learned about:
 - How to read input from stdin using `interact`
 - `read` is used to convert a string to a number
 - `lines` is used to split a string into lines
-- `Data.Bifunctor.bimap` is used to apply a function to two values at once
+- `where` can be used to define helper functions in a function
+- `Data.Bifunctor (bimap)` is used to apply a function to two values at once
+- `Data.List (sort)` is used to sort a list
+- Lambdas are defined like this: `(\x -> x + 1)`
+- `.` is used to compose functions: `(f . g) x = f (g x)`
+- `$` is used to avoid parentheses: `f (g x) = f $ g x` (works sometimes)
+- Operators can be curried like functions: `zipWith (-)` and `filter (== x)`.
+

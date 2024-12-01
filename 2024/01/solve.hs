@@ -1,5 +1,5 @@
 import Data.Bifunctor (bimap)
-import Data.List
+import Data.List (sort)
 
 main = interact $ show . (\input -> (solve1 input, solve2 input)) . parseInput
 
