@@ -43,3 +43,18 @@ Today I learned about:
 - `$` is used to avoid parentheses: `f (g x) = f $ g x` (works sometimes)
 - Operators can be curried like functions: `zipWith (-)` and `filter (== x)`.
 
+## Day 2
+
+- `uncurry` is used to convert a curried function to a function on pairs:
+
+  ```haskell
+  uncurry :: (a -> b -> c) -> (a, b) -> c
+  x = uncurry (+) (1, 2) -- x = 3
+  ```
+
+- `i <- [0 .. length xs - 1]` generates a list of indices for a list `xs`
+- `++` is used to concatenate two lists
+- `elem` is used to check if an element is in a list
+- `[take 3 xs | xs <- xss]` generates a list of the first 3 elements of each list in `xss`
+- `take` is used to take the first `n` elements of a list
+- `drop` is used to drop the first `n` elements of a list
