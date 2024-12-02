@@ -20,12 +20,12 @@ Every year I try to learn a new language as fast as possible through solving pro
 
 ## Yearly Solutions
 Below is a list of the years I have participated in:
-|                 Year                  |              Language               | Stars |                   Leaderboard                    |                               Solutions                                |
-| :-----------------------------------: | :---------------------------------: | :---: | :----------------------------------------------: | :--------------------------------------------------------------------: |
-| [2024](https://adventofcode.com/2024) | [Haskell](https://www.haskell.org/) |   2   | [- 🏆](https://adventofcode.com/2024/leaderboard) | [📁/](https://github.com/WilliamRagstad/Advent-of-Code/tree/main/2024/) |
-| [2023](https://adventofcode.com/2023) |      [F#](https://fsharp.org/)      |  12   | [- 🏆](https://adventofcode.com/2023/leaderboard) | [📁/](https://github.com/WilliamRagstad/Advent-of-Code/tree/main/2023/) |
-| [2022](https://adventofcode.com/2022) | [Rust](https://www.rust-lang.org/)  |   8   | [- 🏆](https://adventofcode.com/2022/leaderboard) | [📁/](https://github.com/WilliamRagstad/Advent-of-Code/tree/main/2022)  |
-| [2015](https://adventofcode.com/2015) | [Haskell](https://www.haskell.org/) |   3   | [- 🏆](https://adventofcode.com/2015/leaderboard) | [📁/](https://github.com/WilliamRagstad/Advent-of-Code/tree/main/2015)  |
+|                 Year                  |              Language               | Stars |                               Solutions                                |
+| :-----------------------------------: | :---------------------------------: | :---: | :--------------------------------------------------------------------: |
+| [2024](https://adventofcode.com/2024) | [Haskell](https://www.haskell.org/) |   4   | [📁/](https://github.com/WilliamRagstad/Advent-of-Code/tree/main/2024/) |
+| [2023](https://adventofcode.com/2023) |      [F#](https://fsharp.org/)      |  12   | [📁/](https://github.com/WilliamRagstad/Advent-of-Code/tree/main/2023/) |
+| [2022](https://adventofcode.com/2022) | [Rust](https://www.rust-lang.org/)  |   8   | [📁/](https://github.com/WilliamRagstad/Advent-of-Code/tree/main/2022)  |
+| [2015](https://adventofcode.com/2015) | [Haskell](https://www.haskell.org/) |   3   | [📁/](https://github.com/WilliamRagstad/Advent-of-Code/tree/main/2015)  |
 
 ## Notice
 My solutions aren't always the most efficient, idiomatic or readable as I try to solve the problems as quickly as possible.
