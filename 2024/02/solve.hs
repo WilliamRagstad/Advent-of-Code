@@ -7,6 +7,8 @@ main = interact $ show . (\input -> (solve1 input, solve2 input)) . parseInput
 parseInput :: String -> [[Int]]
 parseInput s = map (map read . words) (lines s)
 
+---------------- SHARED ----------------
+
 safe :: [Int] -> Bool
 safe report =
   (increasing report || decreasing report) && maxChange report

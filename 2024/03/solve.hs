@@ -4,6 +4,8 @@ import Data.List.NonEmpty (inits, tails)
 
 main = interact $ show . (\input -> (solve1 input, solve2 input))
 
+---------------- SHARED ----------------
+
 mul :: [Char] -> Maybe (Int, Int, [Char])
 mul xs = do
   let (lhs, xs') = span is_num xs
