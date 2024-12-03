@@ -7,14 +7,6 @@ main = interact $ show . (\input -> (solve1 input, solve2 input)) . parseInput
 parseInput :: String -> [[Int]]
 parseInput s = map (map read . words) (lines s)
 
----------------- SOLUTION 1 ----------------
--- Count the number of reports with levels changing
--- by 1 or 2, AND (strictly increasing or decreasing)
-
-solve1 :: [[Int]] -> Int
-solve1 input = do
-  length $ filter safe input
-
 safe :: [Int] -> Bool
 safe report =
   (increasing report || decreasing report) && maxChange report
@@ -30,6 +22,14 @@ decreasing levels =
 maxChange :: [Int] -> Bool
 maxChange report =
   all ((`elem` [1, 2, 3]) . abs) (zipWith (-) report (tail report))
+
+---------------- SOLUTION 1 ----------------
+-- Count the number of reports with levels changing
+-- by 1 or 2, AND (strictly increasing or decreasing)
+
+solve1 :: [[Int]] -> Int
+solve1 input = do
+  length $ filter safe input
 
 ---------------- SOLUTION 2 ----------------
 -- Same as above, but try removing one report
