@@ -25,10 +25,10 @@ Below is a list of the years I have participated in:
 
 |                 Year                  |              Language               | Stars |                               Solutions                                |
 | :-----------------------------------: | :---------------------------------: | :---: | :--------------------------------------------------------------------: |
-| [2024](https://adventofcode.com/2024) | [Haskell](https://www.haskell.org/) |   4   | [📁/](https://github.com/WilliamRagstad/Advent-of-Code/tree/main/2024/) |
-| [2023](https://adventofcode.com/2023) |      [F#](https://fsharp.org/)      |  12   | [📁/](https://github.com/WilliamRagstad/Advent-of-Code/tree/main/2023/) |
-| [2022](https://adventofcode.com/2022) | [Rust](https://www.rust-lang.org/)  |   8   | [📁/](https://github.com/WilliamRagstad/Advent-of-Code/tree/main/2022)  |
-| [2015](https://adventofcode.com/2015) | [Haskell](https://www.haskell.org/) |   3   | [📁/](https://github.com/WilliamRagstad/Advent-of-Code/tree/main/2015)  |
+| [2024](https://adventofcode.com/2024) | [Haskell](https://www.haskell.org/) |  6⭐   | [📁/](https://github.com/WilliamRagstad/Advent-of-Code/tree/main/2024/) |
+| [2023](https://adventofcode.com/2023) |      [F#](https://fsharp.org/)      |  12⭐  | [📁/](https://github.com/WilliamRagstad/Advent-of-Code/tree/main/2023/) |
+| [2022](https://adventofcode.com/2022) | [Rust](https://www.rust-lang.org/)  |  8⭐   | [📁/](https://github.com/WilliamRagstad/Advent-of-Code/tree/main/2022)  |
+| [2015](https://adventofcode.com/2015) | [Haskell](https://www.haskell.org/) |  3⭐   | [📁/](https://github.com/WilliamRagstad/Advent-of-Code/tree/main/2015)  |
 
 ## Notice
 
