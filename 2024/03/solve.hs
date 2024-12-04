@@ -1,7 +1,3 @@
-import Data.Bifunctor (bimap)
-import Data.List (sort)
-import Data.List.NonEmpty (inits, tails)
-
 main = interact $ show . (\input -> (solve1 input, solve2 input))
 
 ---------------- SHARED ----------------
