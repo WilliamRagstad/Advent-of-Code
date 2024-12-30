@@ -70,36 +70,37 @@ span (< 3) [1, 2, 3, 2] -- ([1, 2], [3, 2])
 ```
 
 - Pattern matching can be done in multiple ways:
-	1. Using `case`:
 
-		```haskell
-		case x of
-			0 -> "zero"
-			1 -> "one"
-			_ -> "other"
-		```
+ 1. Using `case`:
 
-	2. Using **function guards**:
+  ```haskell
+  case x of
+   0 -> "zero"
+   1 -> "one"
+   _ -> "other"
+  ```
 
-		```haskell
-		f 0 = "zero"
-		f 1 = "one"
-		f _ = "other"
+ 2. Using **function guards**:
 
-		-- or
+  ```haskell
+  f 0 = "zero"
+  f 1 = "one"
+  f _ = "other"
 
-		f x
-			| x == 0 = "zero"
-			| x == 1 = "one"
-			| otherwise = "other"
-		```
+  -- or
+
+  f x
+   | x == 0 = "zero"
+   | x == 1 = "one"
+   | otherwise = "other"
+  ```
 
 - It's important to use unique names for functions and variables, otherwise you'll get a `name clash` error which are **super sneaky** and **hard to debug**.
 
-	> For example, find the bug here:
-	>
-	> ```haskell
-	> mul xs = do
+ > For example, find the bug here:
+ >
+ > ```haskell
+ > mul xs = do
     > let (lhs, xs) = span is_num xs
     > if head xs == ','
     >   then do
@@ -111,6 +112,53 @@ span (< 3) [1, 2, 3, 2] -- ([1, 2], [3, 2])
     >         Just (lhs', rhs', xs)
     >       else Nothing
     >   else Nothing
-	> ```
-	>
-	> One would expect that the `xs` in the inner `let` would shadow the outer `xs`, **but it doesn't**. The `xs` in the inner `let` is actually the same as the outer `xs`, which causes the `Just (lhs', rhs', xs)` to return the original `xs` instead of the modified `xs`.
+>
+ > ```
+ >
+ > One would expect that the `xs` in the inner `let` would shadow the outer `xs`, **but it doesn't**. The `xs` in the inner `let` is actually the same as the outer `xs`, which causes the `Just (lhs', rhs', xs)` to return the original `xs` instead of the modified `xs`.
+
+## Day 4
+
+Not done yet.
+
+## Day 5
+
+- Realized that I need to learn more about **monads** and **functors** to understand how to work with `IO` and `Maybe` in Haskell. And "print debugging" is not as easy as in other languages.
+Instead of printing, I can use `trace` from `Debug.Trace` to print debug messages.
+
+  ```haskell
+  import Debug.Trace (trace)
+
+  f x = trace ("x: " ++ show (x * 2)) (x * 2)
+
+  main = do
+    let x = f 1  -- x: 1
+    print x      -- 1
+  ```
+
+- The corresponding function to `filterMap` is `mapMaybe` from `Data.Maybe`:
+
+  ```haskell
+  mapMaybe :: (a -> Maybe b) -> [a] -> [b]
+  mapMaybe f xs = [y | Just y <- map f xs]
+  ```
+  
+  And is used like this:
+
+  ```haskell
+  import Data.Maybe (mapMaybe)
+
+  f x = if x `mod` 2 == 0
+        then Just x
+        else Nothing
+
+  g x = if x > 2
+        then Just x
+        else Nothing
+  
+  main = do
+    let xs = mapMaybe f [1, 2, 3, 4]
+    let ys = mapMaybe g [1, 2, 3, 4]
+    print xs  -- [2, 4]
+    print ys  -- [3, 4]
+  ```
