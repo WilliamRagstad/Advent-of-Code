@@ -162,3 +162,5 @@ Instead of printing, I can use `trace` from `Debug.Trace` to print debug message
     print xs  -- [2, 4]
     print ys  -- [3, 4]
   ```
+
+- When it comes to using `foldl` on lists, you always want to use `foldl'` or `foldr'` from `Data.List` instead to avoid **stack overflows**.
