@@ -144,6 +144,7 @@ solve2 (order, pages) = sum $ map (middle . dbg "Fixed: " . fix) $ filter (not .
         -- [to : result]
         _ -> do
           let paths =
+                -- DFS search for all possible paths
                 foldl'
                   ( \acc from -> do
                       let (_, rest) = extractFirst (== from) remaining
